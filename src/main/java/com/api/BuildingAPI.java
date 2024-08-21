@@ -73,6 +73,7 @@ public class BuildingAPI {
 	{
 		List<BuildingDTO> result = buildingService.Finall(name, districtid) ; 
  	    	  return result ; 
+ 	    	  // doan dai phuc dep trai
 	}
 	
 }
