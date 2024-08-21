@@ -74,6 +74,7 @@ public class BuildingAPI {
 		List<BuildingDTO> result = buildingService.Finall(name, districtid) ; 
  	    	  return result ; 
  	    	  // doan dai phuc dep trai
+ 	    	  // co mot khong hai dung vay khong sai
 	}
 	
 }
