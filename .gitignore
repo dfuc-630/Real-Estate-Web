@@ -1,1 +1,7 @@
 /mvnw.cmd
+/.settings
+/.classpath
+/*.classpath
+/HELP.md
+/*.project
+/target
