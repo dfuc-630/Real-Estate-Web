@@ -1,57 +1,49 @@
 package com.repository.entity;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 public class BuildingEntity {
 	private String name; 
 	private Integer floorarea ;
-	private Integer districtid;
 	private String district ; 
 	private String ward; 
 	private String street ;
 	private int NumberOfBasement ;
 	private String direction;
-	public String getDistrict() {
+	private String level;
+	private Integer rentprice ; 
+	private Integer servicefee ; 
+	private Integer brokeragefee ; 
+	private String managername;
+	private String managerphonenumber;
+	private Integer rentarea ;
+	private Integer freearea;
+	private String staff ; 
+	private Integer area ; 
+	private String buildingtype ; 
+	public  String getDistrict() {
 		return district;
 	}
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	private Integer area ; 
 	public Integer getArea() {
 		return area;
 	}
 	public void setArea(Integer area) {
 		this.area = area;
 	}
-	private String staff ; 
+	
 	public String getStaff() {
 		return staff;
 	}
 	public void setStaff(String staff) {
 		this.staff = staff;
 	}
-	private String buildingtype ; 
 	public String getBuildingtype() {
 		return buildingtype;
 	}
 	public void setBuildingtype(String buildingtype) {
 		this.buildingtype = buildingtype;
 	}
-	private String level;
-	private Integer areamin;
-	private  Integer areamax;
-	private Integer rentpricemin;
-	private  Integer rentpricemax;
-	private Integer rentprice ; 
-	private Integer servicefee ; 
-	private Integer brokeragefee ; 
-	private  String managername;
-	private  String managerphonenumber;
-	private  Integer staffid;
-	private  String buildingtypecode;
-	private Integer rentarea ;
-	private String freearea;
 	public Integer getRentprice() {
 		return rentprice;
 	}
@@ -76,10 +68,10 @@ public class BuildingEntity {
 	public void setRentarea(Integer rentarea) {
 		this.rentarea = rentarea;
 	}
-	public String getFreearea() {
+	public Integer getFreearea() {
 		return freearea;
 	}
-	public void setFreearea(String freearea) {
+	public void setFreearea(Integer freearea) {
 		this.freearea = freearea;
 	}
 	public String getName() {
@@ -93,12 +85,6 @@ public class BuildingEntity {
 	}
 	public void setFloorarea(Integer floorarea) {
 		this.floorarea = floorarea;
-	}
-	public Integer getDistrictid() {
-		return districtid;
-	}
-	public void setDistrictid(Integer districtid) {
-		this.districtid = districtid;
 	}
 	public String getWard() {
 		return ward;
@@ -130,30 +116,6 @@ public class BuildingEntity {
 	public void setLevel(String level) {
 		this.level = level;
 	}
-	public Integer getAreamin() {
-		return areamin;
-	}
-	public void setAreamin(Integer areamin) {
-		this.areamin = areamin;
-	}
-	public Integer getAreamax() {
-		return areamax;
-	}
-	public void setAreamax(Integer areamax) {
-		this.areamax = areamax;
-	}
-	public Integer getRentpricemin() {
-		return rentpricemin;
-	}
-	public void setRentpricemin(Integer rentpricemin) {
-		this.rentpricemin = rentpricemin;
-	}
-	public Integer getRentpricemax() {
-		return rentpricemax;
-	}
-	public void setRentpricemax(Integer rentpricemax) {
-		this.rentpricemax = rentpricemax;
-	}
 	public String getManagername() {
 		return managername;
 	}
@@ -165,18 +127,6 @@ public class BuildingEntity {
 	}
 	public void setManagerphonenumber(String managerphonenumber) {
 		this.managerphonenumber = managerphonenumber;
-	}
-	public Integer getStaffid() {
-		return staffid;
-	}
-	public void setStaffid(Integer staffid) {
-		this.staffid = staffid;
-	}
-	public String getBuildingtypecode() {
-		return buildingtypecode;
-	}
-	public void setBuildingtypecode(String buildingtypecode) {
-		this.buildingtypecode = buildingtypecode;
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.Model;
 
-public class BuildingDTO {
-//	private int id ; 
+public class BuildingDTO 
+{
 	private String name; 
 	private String address ; 
 	private Integer NumberOfBasement ;
@@ -11,6 +11,8 @@ public class BuildingDTO {
 	private Integer rentarea ; 
 	private Integer freearea ;
 	private Integer rentprice ;
+	private Integer servicefee ;
+	private Integer brokeragefee ; 
 	public String getMangagername() {
 		return mangagername;
 	}
@@ -54,33 +56,24 @@ public class BuildingDTO {
 	public void setServicefee(Integer servicefee) {
 		this.servicefee = servicefee;
 	}
-	public Integer getMGfee() {
-		return MGfee;
+	public Integer getBrokeragefee() {
+		return brokeragefee;
 	}
-	public void setMGfee(Integer mGfee) {
-		MGfee = mGfee;
+	public void setBrokeragefee(Integer brokeragefee) {
+		this.brokeragefee = brokeragefee;
 	}
-	private Integer servicefee ;
-	private Integer MGfee ; 
 	public Integer getNumberOfBasement() {
 		return NumberOfBasement;
 	}
 	public void setNumberOfBasement(Integer numberOfBasement) {
 		NumberOfBasement = numberOfBasement;
 	}
-
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
-//	public int getId() {
-//		return id;
-//	}
-//	public void setId(int id) {
-//		this.id = id;
-//	}
 	public String getName() {
 		return name;
 	}
