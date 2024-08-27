@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public class BuildingRepositoryImpl implements buildingRepository {
     private static final String PASSWORD = "Phuc06032004@";
 
     @Override
-    public List<BuildingEntity> Finall(ParamCatcher V) {
+    public List<BuildingEntity> Finall(Map<String, Object> param) {
         StringBuilder sql = new StringBuilder("SELECT "
             + "a.name AS 'name', "
             + "a.floorarea AS 'floorarea', "
@@ -49,7 +50,7 @@ public class BuildingRepositoryImpl implements buildingRepository {
             
             + "WHERE 1=1");
 
-        if (V.name != null && !V.name.isEmpty()) {
+        if (param.name != null && !V.name.isEmpty()) {
             sql.append(" AND a.name LIKE '%" + V.name + "%'");
         }
         if (V.floorarea != null) {

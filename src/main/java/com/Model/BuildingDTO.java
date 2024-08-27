@@ -1,5 +1,7 @@
 package com.Model;
 
+import java.util.List;
+
 public class BuildingDTO 
 {
 	private String name; 
@@ -8,7 +10,7 @@ public class BuildingDTO
 	private String mangagername ;
 	private String managerphonenumber ;
 	private Integer floorarea ;
-	private Integer rentarea ; 
+	private List<Integer> rentarea ; 
 	private Integer freearea ;
 	private Integer rentprice ;
 	private Integer servicefee ;
@@ -32,10 +34,10 @@ public class BuildingDTO
 	public void setFloorarea(Integer floorarea) {
 		this.floorarea = floorarea;
 	}
-	public Integer getRentarea() {
+	public List<Integer> getRentarea() {
 		return rentarea;
 	}
-	public void setRentarea(Integer rentarea) {
+	public void setRentarea(List<Integer> rentarea) {
 		this.rentarea = rentarea;
 	}
 	public Integer getFreearea() {
