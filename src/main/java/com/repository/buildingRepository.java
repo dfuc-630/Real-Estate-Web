@@ -6,6 +6,6 @@ import java.util.Map;
 import com.repository.entity.BuildingEntity;
 
 public interface buildingRepository {
-	List<BuildingEntity> Finall(Map<String, Object> param);
+	List<BuildingEntity> Finall(Map<String, Object> param, List<String> buildingtypecode);
 
 }

@@ -22,7 +22,7 @@ public class BuildingRepositoryImpl implements buildingRepository {
     private static final String PASSWORD = "Phuc06032004@";
 
     @Override
-    public List<BuildingEntity> Finall(Map<String, Object> param) {
+    public List<BuildingEntity> Finall(Map<String, Object> param, List<String> buildingtypecode) {
         StringBuilder sql = new StringBuilder("SELECT "
             + "a.name AS 'name', "
             + "a.floorarea AS 'floorarea', "
@@ -50,57 +50,69 @@ public class BuildingRepositoryImpl implements buildingRepository {
             
             + "WHERE 1=1");
 
-        if (param.name != null && !V.name.isEmpty()) {
-            sql.append(" AND a.name LIKE '%" + V.name + "%'");
+        if (param.get("name") != null && !((String) param.get("name")).trim().isEmpty()) {
+            sql.append(" AND a.name LIKE '%" + param.get("name") + "%'");
         }
-        if (V.floorarea != null) {
-            sql.append(" AND a.floorarea=" + V.floorarea);
+        if (param.get("floorarea") != null) {
+            sql.append(" AND a.floorarea=" + param.get("floorarea"));
         }
-        if (V.districtid != null) {
-            sql.append(" AND a.districtid=" + V.districtid);
+        if (param.get("districtid") != null) {
+            sql.append(" AND a.districtid=" + param.get("districtid"));
         }
-        if (V.ward != null && !V.ward.isEmpty()) {
-            sql.append(" AND a.ward LIKE '%" + V.ward + "%'");
+        if (param.get("ward") != null && !((String) param.get("ward")).trim().isEmpty()) {
+            sql.append(" AND a.ward LIKE '%" + param.get("ward") + "%'");
         }
-        if (V.street != null && !V.street.isEmpty()) {
-            sql.append(" AND a.street LIKE '%" + V.street + "%'");
+        if (param.get("street") != null && !((String) param.get("street")).trim().isEmpty()) {
+            sql.append(" AND a.street LIKE '%" + param.get("street") + "%'");
         }
-        if (V.numberofbasement != null) {
-            sql.append(" AND a.numberofbasement=" + V.numberofbasement);
+        if (param.get("numberofbasement") != null) {
+            sql.append(" AND a.numberofbasement=" + param.get("numberofbasement"));
         }
-        if (V.direction != null && !V.direction.isEmpty()) {
-            sql.append(" AND a.direction LIKE '%" + V.direction + "%'");
+        if (param.get("direction") != null && !((String) param.get("direction")).trim().isEmpty()) {
+            sql.append(" AND a.direction LIKE '%" + param.get("direction") + "%'");
         }
-        if (V.level != null && !V.level.isEmpty()) {
-            sql.append(" AND a.level LIKE '%" + V.level + "%'");
+        if (param.get("level") != null && !((String) param.get("level")).trim().isEmpty()) {
+            sql.append(" AND a.level LIKE '%" + param.get("level") + "%'");
         }
-        if (V.areamin != null) {
-            sql.append(" AND c.value >=" + V.areamin);
+        if (param.get("areamin") != null) {
+            sql.append(" AND c.value >=" + param.get("areamin"));
         }
-        if (V.areamax != null) {
-            sql.append(" AND c.value <=" + V.areamax);
+        if (param.get("areamax") != null) {
+            sql.append(" AND c.value <=" + param.get("areamax"));
         }
-        if (V.rentpricemin != null) {
-            sql.append(" AND a.rentprice >=" + V.rentpricemin);
+        if (param.get("rentpricemin") != null) {
+            sql.append(" AND a.rentprice >=" + param.get("rentpricemin"));
         }
-        if (V.rentpricemax != null) {
-            sql.append(" AND a.rentprice <=" + V.rentpricemax);
+        if (param.get("rentpricemax") != null) {
+            sql.append(" AND a.rentprice <=" + param.get("rentpricemax"));
         }
-        if (V.managername != null && !V.managername.isEmpty()) {
-            sql.append(" AND a.managername LIKE '%" + V.managername + "%'");
+        if (param.get("managername") != null && !((String) param.get("managername")).trim().isEmpty()) {
+            sql.append(" AND a.managername LIKE '%" + param.get("managername") + "%'");
         }
-        if (V.managerphonenumber != null && !V.managerphonenumber.isEmpty()) {
-            sql.append(" AND a.managerphonenumber LIKE '%" + V.managerphonenumber + "%'");
+        if (param.get("managerphonenumber") != null && !((String) param.get("managerphonenumber")).trim().isEmpty()) {
+            sql.append(" AND a.managerphonenumber LIKE '%" + param.get("managerphonenumber") + "%'");
         }
-        if (V.staffid != null) {
-            sql.append(" AND d.staffid=" + V.staffid);
+        if (param.get("staffid") != null) {
+            sql.append(" AND d.staffid=" + param.get("staffid"));
         }
-        if (V.buildingtypecode != null && !V.buildingtypecode.isEmpty()) {
-            sql.append(" AND g.code LIKE '%" + V.buildingtypecode + "%'");
+        if (buildingtypecode != null && !buildingtypecode.isEmpty())
+        {
+        	boolean typeflag = false ; 
+        	sql.append(" AND (") ; 
+        	 for (String type : buildingtypecode) {
+                 if(typeflag == false) {
+                	 sql.append(" g.code LIKE '%" + type + "%'");
+                	 typeflag = true ; 
+                 }
+                 else {
+                	 sql.append(" OR g.code LIKE '%" + type + "%'");
+                 }
+        	 }
+        	 sql.append(")") ;
         }
 
         sql.append(";");
-
+        System.out.println(sql.toString());
         List<BuildingEntity> result = new ArrayList<>();
         try {
             // Tải driver (tùy thuộc vào cơ sở dữ liệu)
@@ -109,8 +121,10 @@ public class BuildingRepositoryImpl implements buildingRepository {
             // Tạo kết nối
             try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
                  Statement stmt = conn.createStatement();
+            		
+            		
                  ResultSet rs = stmt.executeQuery(sql.toString())) {
-            	 System.out.println(sql.toString());
+            	 
                 // Xử lý kết quả
                 while (rs.next()) {
                     BuildingEntity building = new BuildingEntity();

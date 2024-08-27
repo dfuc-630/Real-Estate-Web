@@ -36,14 +36,15 @@ public class BuildingAPI
 //										 @RequestParam(name = "staffid", required = false) Integer staffid,
 //										 @RequestParam(name = "buildingtypecode", required = false) String buildingtypecode)
 	
-	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> param)
+	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> param,
+										 @RequestParam(name = "buildingtypecode", required = false) List<String> buildingtypecode)
 	{
 //		ParamCatcher request = new ParamCatcher(name, floorarea, districtid, ward, street, 
 //				 								numberofbasement, direction, level, areamin, 
 //				 								areamax, rentpricemin, rentpricemax, managername, 
 //				 								managerphonenumber, staffid, buildingtypecode);
 //		
-		 List<BuildingDTO> result = buildingService.Finall(param);
+		 List<BuildingDTO> result = buildingService.Finall(param, buildingtypecode);
  	    	  return result ; 
 	}
 	

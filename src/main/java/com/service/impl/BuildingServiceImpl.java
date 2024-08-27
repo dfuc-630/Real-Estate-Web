@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Model.BuildingDTO;
-import com.repository.ParamCatcher;
 import com.repository.buildingRepository;
 import com.repository.entity.BuildingEntity;
 import com.service.BuildingService;
@@ -18,10 +17,10 @@ public class BuildingServiceImpl implements BuildingService {
 	@Autowired
 	private buildingRepository BuildingRepository ; 
 	@Override
-	public List<BuildingDTO> Finall(Map<String, Object> param) 
+	public List<BuildingDTO> Finall(Map<String, Object> param, List<String> buildingtypecode) 
 	
 	{
-		List<BuildingEntity> buildingEntities = BuildingRepository.Finall(param) ; 
+		List<BuildingEntity> buildingEntities = BuildingRepository.Finall(param, buildingtypecode) ; 
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>() ;
 		Map<String, List<Integer>> buildingAreas = new HashMap<>();
 		Map<String, Integer> wordCount = new HashMap<>();
@@ -49,10 +48,6 @@ public class BuildingServiceImpl implements BuildingService {
 				building.setBrokeragefee(item.getBrokeragefee());
 				result.add(building) ;
 			}
-//			else 
-//			{
-//				building.setRentarea(building.getRentarea() + "," + item.getRentarea()) ; 
-//			}
 			
  		}
 		return result;
