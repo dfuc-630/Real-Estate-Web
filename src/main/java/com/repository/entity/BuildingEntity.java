@@ -1,29 +1,41 @@
 package com.repository.entity;
 
 public class BuildingEntity {
-	private String name; 
-	private Integer floorarea ;
-	private String district ; 
+	private Integer id ; 
+	private String name; 	
 	private String ward; 
-	private String street ;
+	private String street ;		
+	private Integer districtid ; 
+	private String managername;
+	private String managerphonenumber;
+	private Integer floorarea ;	
+	private Integer freearea;
+	private Integer rentprice ; 
+	private Integer servicefee ; 
+	private Integer brokeragefee ;
+
 	private int NumberOfBasement ;
 	private String direction;
 	private String level;
-	private Integer rentprice ; 
-	private Integer servicefee ; 
-	private Integer brokeragefee ; 
-	private String managername;
-	private String managerphonenumber;
-	private Integer rentarea ;
-	private Integer freearea;
+	 
+
+	private String rentarea ;
+
 	private String staff ; 
 	private Integer area ; 
 	private String buildingtype ; 
-	public  String getDistrict() {
-		return district;
+
+	public Integer getId() {
+		return id;
 	}
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getDistrictid() {
+		return districtid;
+	}
+	public void setDistrictid(Integer districtid) {
+		this.districtid = districtid;
 	}
 	public Integer getArea() {
 		return area;
@@ -62,10 +74,10 @@ public class BuildingEntity {
 	public void setBrokeragefee(Integer brokeragefee) {
 		this.brokeragefee = brokeragefee;
 	}
-	public Integer getRentarea() {
+	public String getRentarea() {
 		return rentarea;
 	}
-	public void setRentarea(Integer rentarea) {
+	public void setRentarea(String rentarea) {
 		this.rentarea = rentarea;
 	}
 	public Integer getFreearea() {
