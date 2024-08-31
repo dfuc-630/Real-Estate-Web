@@ -33,71 +33,6 @@ public class BuildingRepositoryImpl implements buildingRepository {
     		sql.append(" INNER JOIN rentarea c ON c.buildingid = a.id ") ;
     	}
     }
-    public static void queryTable(Map<String, Object> param, List<String> buildingtypecode, StringBuilder sql) 
-    {
-    	if(Stringutil.checkString((String)param.get("name"))) {
-            sql.append(" AND a.name LIKE '%" + param.get("name") + "%'");
-        }
-        if (param.get("floorarea") != null) {
-            sql.append(" AND a.floorarea=" + param.get("floorarea"));
-        }
-        if (param.get("districtid") != null) {
-            sql.append(" AND a.districtid=" + param.get("districtid"));
-        }
-    	if(Stringutil.checkString((String)param.get("ward"))) {
-            sql.append(" AND a.ward LIKE '%" + param.get("ward") + "%'");
-        }
-    	if(Stringutil.checkString((String)param.get("street"))) {
-            sql.append(" AND a.street LIKE '%" + param.get("street") + "%'");
-        }
-        if (param.get("numberofbasement") != null) {
-            sql.append(" AND a.numberofbasement=" + param.get("numberofbasement"));
-        }
-    	if(Stringutil.checkString((String)param.get("direction"))) {
-            sql.append(" AND a.direction LIKE '%" + param.get("direction") + "%'");
-        }
-    	if(Stringutil.checkString((String)param.get("level"))) {
-            sql.append(" AND a.level LIKE '%" + param.get("level") + "%'");
-        }
-//        if (param.get("areamin") != null) {
-//            sql.append(" AND c.value >=" + param.get("areamin"));
-//        }
-//        if (param.get("areamax") != null) {
-//            sql.append(" AND c.value <=" + param.get("areamax"));
-//        }
-        if (param.get("rentpricemin") != null) {
-            sql.append(" AND a.rentprice >=" + param.get("rentpricemin"));
-        }
-        if (param.get("rentpricemax") != null) {
-            sql.append(" AND a.rentprice <=" + param.get("rentpricemax"));
-        }
-    	if(Stringutil.checkString((String)param.get("managername"))) {
-            sql.append(" AND a.managername LIKE '%" + param.get("managername") + "%'");
-        }
-    	if(Stringutil.checkString((String)param.get("managerphonenumber"))) {
-            sql.append(" AND a.managerphonenumber LIKE '%" + param.get("managerphonenumber") + "%'");
-        }
-//        if (param.get("staffid") != null) {
-//            sql.append(" AND d.staffid=" + param.get("staffid"));
-//        }
-//        if (buildingtypecode != null && !buildingtypecode.isEmpty())
-//        {
-//        	boolean typeflag = false ; 
-//        	sql.append(" AND (") ; 
-//        	 for (String type : buildingtypecode) {
-//                 if(typeflag == false) {
-//                	 sql.append(" g.code LIKE '%" + type + "%'");
-//                	 typeflag = true ; 
-//                 }
-//                 else {
-//                	 sql.append(" OR g.code LIKE '%" + type + "%'");
-//                 }
-//        	 }
-//        	 sql.append(")") ;
-//        }
-
-        sql.append("GROUP BY a.id;") ;
-    }
     public static void queryNormal(Map<String, Object> param, StringBuilder where)
     { 
     	for(Map.Entry<String, Object> item: param.entrySet())
@@ -117,10 +52,8 @@ public class BuildingRepositoryImpl implements buildingRepository {
     					where.append(" AND a." + item.getKey() + " like '%" + value + "%' ") ;
     				}
     			}
-    			
     		}
     	}
-    	
     }
     public static void querySpecial(Map<String, Object> param, List<String> buildingtypecode, StringBuilder where) 
     { 
@@ -144,28 +77,20 @@ public class BuildingRepositoryImpl implements buildingRepository {
     	if (Stringutil.checkString(rentpricemax)) {
     		where.append(" AND a.rentprice <=" + param.get("rentpricemax"));
     	}
-
 		if (buildingtypecode != null && !buildingtypecode.isEmpty())
 		{
-//			List<String> code = new ArrayList<>() ; 
-//			for(String item: buildingtypecode) 
-//			{
-//				code.add("'" + item + "'") ; 				
-//			}
-//			where.append(" AND g.code IN(" + String.join(",", code) + ") ") ; 
-//			where.append(" AND g.code IN(" + String.join(",", buildingtypecode) + ") ") ; 
-			boolean typeflag = false ; 
-			where.append(" AND (") ; 
-		 for (String type : buildingtypecode) {
-		     if(typeflag == false) {
-		    	 where.append(" g.code LIKE '%" + type + "%'");
-			 typeflag = true ; 
-		 }
-		 else {
-			 where.append(" OR g.code LIKE '%" + type + "%'");
-		     }
-		 }
-		 where.append(")") ;
+			 boolean typeflag = false ; 
+			 where.append(" AND (") ; 
+			 for (String type : buildingtypecode) {
+			     if(typeflag == false) {
+			    	 where.append(" g.code LIKE '%" + type + "%'");
+				 typeflag = true ; 
+			 }
+			 else {
+				 where.append(" OR g.code LIKE '%" + type + "%'");
+			     }
+			 }
+			 where.append(")") ;
 		}
     }
     @Override
@@ -180,13 +105,10 @@ public class BuildingRepositoryImpl implements buildingRepository {
             + "a.numberofbasement AS 'numberofbasement', "
             + "a.direction AS 'direction', "
             + "a.level AS 'level', "
-            //+ "c.value AS 'rentarea', "
             + "a.rentprice AS 'rentprice', "
             + "a.managername AS 'managername', "
             + "a.managerphonenumber AS 'managerphonenumber', "
             + "a.servicefee, "
-            //+ "e.fullname AS 'staff', "
-            //+ "g.name AS 'buildingtype', "
             + "a.brokeragefee AS 'brokeragefee' "
             + "FROM building a " ); 
             
@@ -218,18 +140,11 @@ public class BuildingRepositoryImpl implements buildingRepository {
                     building.setStreet(rs.getString("street"));
                     building.setNumberOfBasement(rs.getInt("numberofbasement"));
                     building.setDirection(rs.getString("direction"));
-                    building.setLevel(rs.getString("level"));
-//                    if(Stringutil.checkString((String) param.get("areamin")) || Stringutil.checkString((String) param.get("areamax")))
-//                    {
-//                    	 building.setRentarea(rs.getInt("rentarea"));
-//                    }              
+                    building.setLevel(rs.getString("level"));          
                     building.setRentprice(rs.getInt("rentprice"));
                     building.setManagername(rs.getString("managername"));
                     building.setManagerphonenumber(rs.getString("managerphonenumber"));
-//                    building.setStaff(rs.getString("staff"));
-//                    building.setBuildingtype(rs.getString("buildingtype"));
-                    building.setServicefee(rs.getInt("a.servicefee"));
-                 
+                    building.setServicefee(rs.getInt("a.servicefee"));            
                     building.setBrokeragefee(rs.getInt("brokeragefee"));
                     result.add(building);
                 }

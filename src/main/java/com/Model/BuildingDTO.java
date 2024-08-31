@@ -1,13 +1,11 @@
 package com.Model;
 
-import java.util.List;
-
 public class BuildingDTO 
 {
 	private String name; 
 	private String address ; 
 	private Integer NumberOfBasement ;
-	private String mangagername ;
+	private String managername ;
 	private String managerphonenumber ;
 	private Integer floorarea ;
 	private String rentarea ; 
@@ -15,8 +13,8 @@ public class BuildingDTO
 	private Integer rentprice ;
 	private Integer servicefee ;
 	private Integer brokeragefee ; 
-	public String getMangagername() {
-		return mangagername;
+	public String getManagername() {
+		return managername;
 	}
 	public String getManagerphonenumber() {
 		return managerphonenumber;
@@ -24,8 +22,8 @@ public class BuildingDTO
 	public void setManagerphonenumber(String managerphonenumber) {
 		this.managerphonenumber = managerphonenumber;
 	}
-	public void setMangagername(String mangagername) {
-		this.mangagername = mangagername;
+	public void setManagername(String mangagername) {
+		this.managername = mangagername;
 	}
 
 	public Integer getFloorarea() {
