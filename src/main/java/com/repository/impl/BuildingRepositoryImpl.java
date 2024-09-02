@@ -1,82 +1,95 @@
 package com.repository.impl;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.builder.BuildingSearchBuilder;
 import com.repository.buildingRepository;
 import com.repository.entity.BuildingEntity;
-import com.utils.NumberUtil;
 import com.utils.Stringutil ;
 import com.utils.UtilConnectionJDBC;
 @Repository
 public class BuildingRepositoryImpl implements buildingRepository {
 
-    public static void joinTable(Map<String, Object> param, List<String> buildingtypecode, StringBuilder sql) 
+    public static void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) 
     {
-    	String staffid = (String) param.get("staffid") ;
-    	if (Stringutil.checkString(staffid)) {
+    	Integer staffid =  buildingSearchBuilder.getStaffid() ;
+    	if (staffid != null) {
 	    	sql.append(" INNER JOIN assignmentbuilding d ON d.buildingid = a.id ") ;
     	}
+    	List<String> buildingtypecode = buildingSearchBuilder.getBuildingtypecode() ; 
     	if (buildingtypecode != null && !buildingtypecode.isEmpty())
     	{
     		sql.append(" INNER JOIN buildingrenttype f ON f.buildingid = a.id ") ;
     		sql.append(" INNER JOIN renttype g ON g.id = f.renttypeid ") ;
     	}	
-    	String areamin = (String) param.get("areamin") ;
-    	String areamax = (String) param.get("areamax") ; 
-    	if (Stringutil.checkString(areamin) || Stringutil.checkString(areamax)) {
+    	Integer areamin = buildingSearchBuilder.getAreamin() ;
+    	Integer areamax = buildingSearchBuilder.getAreamax() ; 
+    	if (areamin != null || areamax != null) {
     		sql.append(" INNER JOIN rentarea c ON c.buildingid = a.id ") ;
     	}
     }
-    public static void queryNormal(Map<String, Object> param, StringBuilder where)
+    public static void queryNormal(BuildingSearchBuilder buildingSearchBuilder, StringBuilder where)
     { 
-    	for(Map.Entry<String, Object> item: param.entrySet())
+    	try
     	{
-    		if(!item.getKey().equals("staffid") && !item.getKey().equals("areamin") && !item.getKey().equals("areamax") 
-    				&& !item.getKey().equals("buildingtypecode") && !item.getKey().equals("rentpricemin") && !item.getKey().equals("rentpricemax"))
+    		Field[] fields = BuildingSearchBuilder.class.getDeclaredFields() ; 
+    		for(Field item: fields) 
     		{
-    			String value = item.getValue().toString() ; 
-    			if(Stringutil.checkString(value))
+    			item.setAccessible(true);
+    			String fieldName = item.getName() ; 
+    			if(!fieldName.equals("staffid") && !fieldName.equals("areamin") && !fieldName.equals("areamax") 
+        				&& !fieldName.equals("buildingtypecode") && !fieldName.equals("rentpricemin") && !fieldName.equals("rentpricemax"))
     			{
-    				if(NumberUtil.isNumber(value))
-    				{
-    					where.append(" AND a." + item.getKey() +  " =" + value ) ;  
-    				}
-    				else 
-    				{
-    					where.append(" AND a." + item.getKey() + " like '%" + value + "%' ") ;
-    				}
+    				Object value = item.get(buildingSearchBuilder) ; 
+    				if(value != null)
+        			{
+        				if(item.getType().getName().equals("java.lang.Integer"))
+        				{
+        					where.append(" AND a." + fieldName +  " =" + value ) ;  
+        				}
+        				else if(item.getType().getName().equals("java.lang.String")) // String
+        				{
+        					where.append(" AND a." + fieldName + " like '%" + value + "%' ") ;
+        				}
+        			}
     			}
     		}
+    		
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();  
     	}
     }
-    public static void querySpecial(Map<String, Object> param, List<String> buildingtypecode, StringBuilder where) 
+    public static void querySpecial(BuildingSearchBuilder buildingSearchBuilder, StringBuilder where) 
     { 
-    	String staffid = (String) param.get("staffid") ;
-    	if (Stringutil.checkString(staffid)) {
-    		where.append(" AND d.staffid=" + param.get("staffid"));
+    	Integer staffid =  buildingSearchBuilder.getStaffid() ;
+    	if (staffid != null) {
+    		where.append(" AND d.staffid=" + staffid);
     	}
-    	String areamin = (String) param.get("areamin") ;
-    	String areamax = (String) param.get("areamax") ; 
-    	if (Stringutil.checkString(areamin)) {
-    		where.append(" AND c.value >=" + param.get("areamin"));
+    	Integer areamin = buildingSearchBuilder.getAreamin() ;
+    	Integer areamax = buildingSearchBuilder.getAreamax() ; 
+    	if (areamin != null) {
+    		where.append(" AND c.value >=" + areamin);
     	}
-    	if (Stringutil.checkString(areamax)) {
-    		where.append(" AND c.value <=" + param.get("areamax"));
+    	if (areamax != null) {
+    		where.append(" AND c.value <=" + areamax);
     	}
-    	String rentpricemin = (String) param.get("rentpricemin") ;
-    	String rentpricemax = (String) param.get("rentpricemax") ; 
-    	if (Stringutil.checkString(rentpricemin)) {
-    		where.append(" AND a.rentprice >=" + param.get("rentpricemin"));
+    	Integer rentpricemin = buildingSearchBuilder.getRentpricemin() ;
+    	Integer rentpricemax = buildingSearchBuilder.getRentpricemax() ; 
+    	if (rentpricemin != null) {
+    		where.append(" AND a.rentprice >=" + rentpricemin);
     	}
-    	if (Stringutil.checkString(rentpricemax)) {
-    		where.append(" AND a.rentprice <=" + param.get("rentpricemax"));
+    	if (rentpricemax != null) {
+    		where.append(" AND a.rentprice <=" + rentpricemax);
     	}
+    	List<String> buildingtypecode = buildingSearchBuilder.getBuildingtypecode() ; 
 		if (buildingtypecode != null && !buildingtypecode.isEmpty())
 		{
 			 boolean typeflag = false ; 
@@ -94,7 +107,7 @@ public class BuildingRepositoryImpl implements buildingRepository {
 		}
     }
     @Override
-    public List<BuildingEntity> Finall(Map<String, Object> param, List<String> buildingtypecode) {
+    public List<BuildingEntity> Finall(BuildingSearchBuilder buildingSearchBuilder) {
         StringBuilder sql = new StringBuilder("SELECT "
         	+ "a.id, "
         	+ "a.name AS 'name', "
@@ -112,11 +125,11 @@ public class BuildingRepositoryImpl implements buildingRepository {
             + "a.brokeragefee AS 'brokeragefee' "
             + "FROM building a " ); 
             
-            joinTable(param, buildingtypecode, sql) ; 
+            joinTable(buildingSearchBuilder, sql) ; 
             StringBuilder where = new StringBuilder(" WHERE 1=1 ") ;
             
-            queryNormal(param, where) ;
-            querySpecial(param, buildingtypecode, where) ;
+            queryNormal(buildingSearchBuilder, where) ;
+            querySpecial(buildingSearchBuilder, where) ;
             where.append(" GROUP BY a.id") ; 
             sql.append(where) ; 
             
