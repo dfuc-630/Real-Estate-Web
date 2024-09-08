@@ -8,29 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.Model.BuildingDTO;
-import com.repository.DistrictRepository;
-import com.repository.RentTypeRepository;
 import com.repository.entity.BuildingEntity;
-import com.repository.entity.DistrictEntity;
-import com.repository.entity.RentTypeEntity;
+import com.repository.entity.RentAreaEntity;
 
 @Component
 public class BuildingDTOConverter {
-	@Autowired
-	private DistrictRepository districtRepository ; 
-	
-	@Autowired
-	private RentTypeRepository rentTypeRepository ; 
-	
+
 	@Autowired 
 	private ModelMapper modelMapper ; 
 	public BuildingDTO buildingConverter(BuildingEntity item) 
 	{
 			BuildingDTO building = modelMapper.map(item, BuildingDTO.class) ; 
-			DistrictEntity districtEntity = districtRepository.findNameById(item.getDistrictid()) ; 
-			building.setAddress(item.getStreet() + "," + item.getWard() + "," + districtEntity.getName());
+//			DistrictEntity districtEntity = item.getDistrict() ; 
+			building.setAddress(item.getStreet() + "," + item.getWard() + "," + item.getDistrict().getName());
 			
-			List<RentTypeEntity> rentTypeEntity = rentTypeRepository.FindAreaById(item.getId()) ; 
+			List<RentAreaEntity> rentTypeEntity = item.getRentAreas() ; 
 			String rentArea = rentTypeEntity.stream().map(it -> it.getValue().toString()).collect(Collectors.joining(",")); 
 			building.setRentarea(rentArea) ;
 

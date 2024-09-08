@@ -1,61 +1,104 @@
 package com.repository.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "building") 
 public class BuildingEntity {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id ; 
+	
+	@Column(name = "name") 
 	private String name; 	
+	
+	@Column(name = "ward")  
 	private String ward; 
-	private String street ;		
-	private Integer districtid ; 
+	
+	@Column(name = "street")  
+	private String street ;	
+	
+//	@Column(name = "districtid")  
+//	private Integer districtid ;
+	
+	@Column(name = "managername")  
 	private String managername;
+	
+	@Column(name = "managerphonenumber")  
 	private String managerphonenumber;
+	
+	@Column(name = "floorarea") 
 	private Integer floorarea ;	
-	private Integer freearea;
-	private Integer rentprice ; 
-	private Integer servicefee ; 
+	
+//	@Column(name = "freearea")  
+//	private Integer freearea;
+	
+	@Column(name = "rentprice")  
+	private Integer rentprice ;
+	
+	@Column(name = "servicefee")  
+	private Integer servicefee ;
+	
+	@Column(name = "brokeragefee")  
 	private Integer brokeragefee ;
-
-	private int NumberOfBasement ;
+	
+	@Column(name = "numberofbasement")  
+	private Integer numberofbasement ;
+	
+	@Column(name = "direction")  
 	private String direction;
+	
+	@Column(name = "level")  
 	private String level;
-	 
+	
+//	@Column(name = "rentarea")  
+//	private String rentarea ;
 
-	private String rentarea ;
-
-	private String staff ; 
-	private Integer area ; 
-	private String buildingtype ; 
-
+	@ManyToOne
+	@JoinColumn(name = "districtid")
+	private DistrictEntity district ; 
+	
+	@OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+	private List<RentAreaEntity> rentAreas = new ArrayList<>() ;
+	
+	
+	public DistrictEntity getDistrict() {
+		return district;
+	}
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
+	}
+	public List<RentAreaEntity> getRentAreas() {
+		return rentAreas;
+	}
+	public void setRentAreas(List<RentAreaEntity> rentAreas) {
+		this.rentAreas = rentAreas;
+	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getDistrictid() {
-		return districtid;
-	}
-	public void setDistrictid(Integer districtid) {
-		this.districtid = districtid;
-	}
-	public Integer getArea() {
-		return area;
-	}
-	public void setArea(Integer area) {
-		this.area = area;
-	}
-	
-	public String getStaff() {
-		return staff;
-	}
-	public void setStaff(String staff) {
-		this.staff = staff;
-	}
-	public String getBuildingtype() {
-		return buildingtype;
-	}
-	public void setBuildingtype(String buildingtype) {
-		this.buildingtype = buildingtype;
-	}
+//	public Integer getDistrictid() {
+//		return districtid;
+//	}
+//	public void setDistrictid(Integer districtid) {
+//		this.districtid = districtid;
+//	}
 	public Integer getRentprice() {
 		return rentprice;
 	}
@@ -74,18 +117,18 @@ public class BuildingEntity {
 	public void setBrokeragefee(Integer brokeragefee) {
 		this.brokeragefee = brokeragefee;
 	}
-	public String getRentarea() {
-		return rentarea;
-	}
-	public void setRentarea(String rentarea) {
-		this.rentarea = rentarea;
-	}
-	public Integer getFreearea() {
-		return freearea;
-	}
-	public void setFreearea(Integer freearea) {
-		this.freearea = freearea;
-	}
+//	public String getRentarea() {
+//		return rentarea;
+//	}
+//	public void setRentarea(String rentarea) {
+//		this.rentarea = rentarea;
+//	}
+//	public Integer getFreearea() {
+//		return freearea;
+//	}
+//	public void setFreearea(Integer freearea) {
+//		this.freearea = freearea;
+//	}
 	public String getName() {
 		return name;
 	}
@@ -110,11 +153,11 @@ public class BuildingEntity {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public int getNumberOfBasement() {
-		return NumberOfBasement;
+	public Integer getNumberOfBasement() {
+		return numberofbasement;
 	}
-	public void setNumberOfBasement(int numberOfBasement) {
-		NumberOfBasement = numberOfBasement;
+	public void setNumberOfBasement(Integer numberofbasement) {
+		this.numberofbasement = numberofbasement;
 	}
 	public String getDirection() {
 		return direction;

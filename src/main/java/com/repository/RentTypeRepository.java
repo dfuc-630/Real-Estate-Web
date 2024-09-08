@@ -2,8 +2,8 @@ package com.repository;
 
 import java.util.List;
 
-import com.repository.entity.RentTypeEntity;
+import com.repository.entity.RentAreaEntity;
 
 public interface RentTypeRepository {
-	List<RentTypeEntity>  FindAreaById(Integer id) ; 
+	List<RentAreaEntity>  FindAreaById(Integer id) ; 
 }
