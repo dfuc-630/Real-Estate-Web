@@ -13,7 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 @Repository
-@Primary
+//@Primary
 public class BuildingRepositoryImpl implements buildingRepository {
 	@PersistenceContext
 	private EntityManager entityManager ; 

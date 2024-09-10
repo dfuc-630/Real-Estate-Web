@@ -1,20 +1,23 @@
 package com.repository.impl;
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.builder.BuildingSearchBuilder;
 import com.repository.buildingRepository;
 import com.repository.entity.BuildingEntity;
-import com.utils.Stringutil ;
-import com.utils.UtilConnectionJDBC;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 @Repository
+@Primary
 public class JDBCBuildingRepositoryImpl implements buildingRepository {
+
+	@PersistenceContext
+	private EntityManager entityManager ;
 
     public static void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) 
     {
@@ -134,37 +137,38 @@ public class JDBCBuildingRepositoryImpl implements buildingRepository {
             sql.append(where) ; 
             
             System.out.println(sql.toString());
-        List<BuildingEntity> result = new ArrayList<>();
-        try {
-            // Tải driver (tùy thuộc vào cơ sở dữ liệu)
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Tạo kết nối
-            try (Connection conn = UtilConnectionJDBC.getConnection();
-                 Statement stmt = conn.createStatement();           		            		
-                 ResultSet rs = stmt.executeQuery(sql.toString())) {   
-                // Xử lý kết quả
-                while (rs.next()) {
-                    BuildingEntity building = new BuildingEntity();
-                    building.setId(rs.getInt("a.id"));
-                    building.setName(rs.getString("name"));
-                    building.setFloorarea(rs.getInt("floorarea"));
-//                    building.setDistrictid(rs.getInt("districtid"));
-                    building.setWard(rs.getString("ward"));
-                    building.setStreet(rs.getString("street"));
-                    building.setNumberOfBasement(rs.getInt("numberofbasement"));
-                    building.setDirection(rs.getString("direction"));
-                    building.setLevel(rs.getString("level"));          
-                    building.setRentprice(rs.getInt("rentprice"));
-                    building.setManagername(rs.getString("managername"));
-                    building.setManagerphonenumber(rs.getString("managerphonenumber"));
-                    building.setServicefee(rs.getInt("a.servicefee"));            
-                    building.setBrokeragefee(rs.getInt("brokeragefee"));
-                    result.add(building);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+//        List<BuildingEntity> result = new ArrayList<>();
+//        try {
+//            // Tải driver (tùy thuộc vào cơ sở dữ liệu)
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            // Tạo kết nối
+//            try (Connection conn = UtilConnectionJDBC.getConnection();
+//                 Statement stmt = conn.createStatement();           		            		
+//                 ResultSet rs = stmt.executeQuery(sql.toString())) {   
+//                // Xử lý kết quả
+//                while (rs.next()) {
+//                    BuildingEntity building = new BuildingEntity();
+//                    building.setId(rs.getInt("a.id"));
+//                    building.setName(rs.getString("name"));
+////                    building.setFloorarea(rs.getInt("floorarea"));
+////                    building.setDistrictid(rs.getInt("districtid"));
+//                    building.setWard(rs.getString("ward"));
+//                    building.setStreet(rs.getString("street"));
+////                    building.setNumberOfBasement(rs.getInt("numberofbasement"));
+////                    building.setDirection(rs.getString("direction"));
+////                    building.setLevel(rs.getString("level"));          
+//                    building.setRentprice(rs.getInt("rentprice"));
+//                    building.setManagername(rs.getString("managername"));
+//                    building.setManagerphonenumber(rs.getString("managerphonenumber"));
+////                    building.setServicefee(rs.getInt("a.servicefee"));            
+////                    building.setBrokeragefee(rs.getInt("brokeragefee"));
+//                    result.add(building);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        Query result = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class) ; 
+        return result.getResultList();
     }
 }
