@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Model.BuildingDTO;
 import com.Model.BuildingRequestDTO;
+import com.repository.buildingRepository;
 import com.repository.entity.BuildingEntity;
 import com.repository.entity.DistrictEntity;
 import com.service.BuildingService;
@@ -33,9 +34,11 @@ public class BuildingAPI
 	@Autowired
 	private BuildingService buildingService ; 
 	
+	@Autowired
+	private buildingRepository BuildingRepository ; 
 	@PersistenceContext
 	private EntityManager entityManager ;
-	
+//	@Lazy
 	@GetMapping(value = "api/building/")
 	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> param,
 										 @RequestParam(name = "buildingtypecode", required = false) List<String> buildingtypecode)
@@ -61,15 +64,16 @@ public class BuildingAPI
 		Integer id = buildingRequestDTO.getDistrictid() ; 
 		districtEntity.setId(id) ; 
 		buildingEntity.setDistrict(districtEntity) ;
-		entityManager.persist(buildingEntity) ; 
+//		entityManager.persist(buildingEntity) ; 
+		BuildingRepository.save(buildingEntity) ; 
 		System.out.print("ok") ; 
 	}
 	
 	@PutMapping(value = "/api/building/")
 	public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequestDTO)
 	{
-		BuildingEntity buildingEntity = new BuildingEntity() ; 
-		buildingEntity.setId(5) ; 
+		BuildingEntity buildingEntity = BuildingRepository.findById(buildingRequestDTO.getId()).get() ; 
+//		buildingEntity.setId(5) ; 
 		
 		String name = buildingRequestDTO.getName() ; 
 		buildingEntity.setName(name) ;
@@ -84,15 +88,14 @@ public class BuildingAPI
 		Integer districid = buildingRequestDTO.getDistrictid() ; 
 		districtEntity.setId(districid) ; 
 		buildingEntity.setDistrict(districtEntity) ;
-		entityManager.merge(buildingEntity) ; 
+		BuildingRepository.save(buildingEntity) ; 
 		System.out.print("ok") ; 
 	}
 	
-	@DeleteMapping(value = "/api/building/")
-	public void deleteBuilding(@PathVariable Integer id) 
+	@DeleteMapping(value = "/api/building/{ids}")
+	public void deleteBuilding(@PathVariable List<Integer> ids) 
 	{
-		BuildingEntity buildingEntity = entityManager.find(BuildingEntity.class, id) ; 
-		entityManager.remove(buildingEntity) ; 
+		BuildingRepository.deleteByIdIn(ids) ; 
 		
 	}
 }

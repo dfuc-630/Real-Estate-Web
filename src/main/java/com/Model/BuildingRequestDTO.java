@@ -1,11 +1,19 @@
 package com.Model;
 
 public class BuildingRequestDTO {
+	private Integer id ; 
 	private String name; 	
 	private String ward; 
 	private String street ;	
 	private Integer districtid ;
 	private Integer rentprice ;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

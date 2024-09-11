@@ -16,6 +16,7 @@ import com.repository.entity.BuildingEntity;
 import com.service.BuildingService;
 @Service
 public class BuildingServiceImpl implements BuildingService {
+	
 	@Autowired
 	private buildingRepository BuildingRepository ; 
 	
@@ -31,12 +32,15 @@ public class BuildingServiceImpl implements BuildingService {
 	{
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(param, buildingtypecode) ; 
 		List<BuildingEntity> buildingEntities = BuildingRepository.Finall(buildingSearchBuilder) ; 
+//		BuildingEntity buildingEntities = BuildingRepository.findById(1).get() ;
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>() ;
 		for(BuildingEntity item: buildingEntities)
 		{
 				BuildingDTO building = buildingDTOConverter.buildingConverter(item) ;
 				result.add(building) ;
  		}
+		
+		
 		return result;
 	}
 

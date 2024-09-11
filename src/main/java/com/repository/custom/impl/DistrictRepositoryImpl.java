@@ -1,4 +1,4 @@
-package com.repository.impl;
+package com.repository.custom.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

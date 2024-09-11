@@ -1,4 +1,4 @@
-package com.repository.impl;
+package com.repository.custom.impl;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -6,15 +6,15 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.builder.BuildingSearchBuilder;
-import com.repository.buildingRepository;
+import com.repository.custom.BuildingRepositoryCustom;
 import com.repository.entity.BuildingEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 @Repository
-@Primary
-public class JDBCBuildingRepositoryImpl implements buildingRepository {
+//@Primary
+public class BuildingRepositoryImpl implements BuildingRepositoryCustom  {
 
 	@PersistenceContext
 	private EntityManager entityManager ;
@@ -111,22 +111,7 @@ public class JDBCBuildingRepositoryImpl implements buildingRepository {
     }
     @Override
     public List<BuildingEntity> Finall(BuildingSearchBuilder buildingSearchBuilder) {
-        StringBuilder sql = new StringBuilder("SELECT "
-        	+ "a.id, "
-        	+ "a.name AS 'name', "
-            + "a.floorarea AS 'floorarea', "
-            + "a.districtid AS 'districtid', "
-            + "a.ward AS 'ward', "
-            + "a.street AS 'street', "
-            + "a.numberofbasement AS 'numberofbasement', "
-            + "a.direction AS 'direction', "
-            + "a.level AS 'level', "
-            + "a.rentprice AS 'rentprice', "
-            + "a.managername AS 'managername', "
-            + "a.managerphonenumber AS 'managerphonenumber', "
-            + "a.servicefee, "
-            + "a.brokeragefee AS 'brokeragefee' "
-            + "FROM building a " ); 
+        StringBuilder sql = new StringBuilder("SELECT a.* FROM building a "); 
             
             joinTable(buildingSearchBuilder, sql) ; 
             StringBuilder where = new StringBuilder(" WHERE 1=1 ") ;
