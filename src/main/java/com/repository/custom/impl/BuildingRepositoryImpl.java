@@ -2,7 +2,6 @@ package com.repository.custom.impl;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.builder.BuildingSearchBuilder;
