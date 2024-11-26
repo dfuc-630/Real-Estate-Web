@@ -3,7 +3,7 @@ package com.javaweb.model.response;
 public class StaffResponseDTO {
 
     private String fullName;
-    private Integer staffId;
+    private Long staffId;
     private String checked;
 
     public String getFullName() {
@@ -14,11 +14,11 @@ public class StaffResponseDTO {
         this.fullName = fullName;
     }
 
-    public Integer getStaffId() {
+    public Long getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(Integer staffId) {
+    public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 

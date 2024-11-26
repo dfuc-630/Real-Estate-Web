@@ -62,7 +62,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/admin/user-edit-{id}", method = RequestMethod.GET)
-	public ModelAndView updateUser(@PathVariable("id") Long id, HttpServletRequest request) {
+	public ModelAndView updateUser(@PathVariable("id") Integer id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/user/edit");
 		UserDTO model = userService.findUserById(id);
 		model.setRoleDTOs(roleService.getRoles());

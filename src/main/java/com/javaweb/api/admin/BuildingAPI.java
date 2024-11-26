@@ -5,6 +5,7 @@ import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.service.IBuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,15 +17,17 @@ public class BuildingAPI {
     private IBuildingService buildingService ;
 
     @PostMapping
-    public BuildingDTO addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO)
+    public ResponseEntity<BuildingDTO> addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO)
     {
         // xuong DB de update hoac them moi
-        return buildingDTO ;
+        return ResponseEntity.ok(buildingService.addOrUpdateBuilding(buildingDTO)) ;
     }
     @DeleteMapping("/{ids}")
-    public void deleteBuilding(@RequestBody List<Integer> ids)
+    public void deleteBuilding(@PathVariable List<Integer> ids)
     {
         // xuong db de xoa building theo danh sach id gui ve
+        buildingService.deleteBuilding(ids);
+
         System.out.println("ok");
     }
     @GetMapping("/{id}/staffs")
@@ -37,6 +40,8 @@ public class BuildingAPI {
     @PostMapping("/assignment")
     public void updateAssignmentBuilding(@RequestBody AssignmentBuildingDTO assignmentBuildingDTO)
     {
+        // xuong db giao building cho nhan vien
+        buildingService.updateAssignment(assignmentBuildingDTO);
         System.out.println("OK");
     }
 }

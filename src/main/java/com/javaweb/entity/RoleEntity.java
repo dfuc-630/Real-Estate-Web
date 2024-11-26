@@ -11,7 +11,7 @@ public class RoleEntity extends BaseEntity {
     private static final long serialVersionUID = -6525302831793188081L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name="name")
     private String name;
@@ -24,12 +24,12 @@ public class RoleEntity extends BaseEntity {
     }
 
     @Override
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

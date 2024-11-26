@@ -51,7 +51,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
                         && !fieldName.equals("rentpricemin") && !fieldName.equals("rentpricemax"))
                 {
                     Object value = item.get(buildingSearchBuilder) ;
-                    if(value != null)
+                    if(value != null && value != "")
                     {
                         if(item.getType().getName().equals("java.lang.Integer"))
                         {

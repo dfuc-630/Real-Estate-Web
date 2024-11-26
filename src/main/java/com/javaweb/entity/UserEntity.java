@@ -12,7 +12,16 @@ public class UserEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Column(name = "username", nullable = false, unique = true)
     private String userName;
@@ -97,13 +106,5 @@ public class UserEntity extends BaseEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-        @Override
-    public Integer getId() {
-        return id;
-    }
 
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

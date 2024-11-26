@@ -54,6 +54,20 @@ public class BuildingEntity {
     @Column(name = "level")
     private String level;
 
+    @Column(name = "type")
+    private String type;
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 //	@Column(name = "rentarea")
 //	private String rentarea ;
 
@@ -67,11 +81,11 @@ public class BuildingEntity {
 //        this.district = district;
 //    }
 
-//    @OneToMany(mappedBy = "buildingEntity", fetch = FetchType.LAZY)
-//    private List<RentAreaEntity> rentAreas = new ArrayList<>() ;
+    @OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+    private List<RentAreaEntity> rentAreas = new ArrayList<>() ;
 
-//    @OneToMany(mappedBy = "buildingEntity", fetch = FetchType.LAZY)
-//    private List<AssignBuildingEntity> assignBuildingEntities = new ArrayList<>() ;
+    @OneToMany(mappedBy = "buildingEntity", fetch = FetchType.LAZY)
+    private List<AssignBuildingEntity> assignBuildingEntities = new ArrayList<>() ;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="assignmentbuilding",
                 joinColumns = @JoinColumn(name="buildingid", nullable = false),
@@ -94,13 +108,13 @@ public class BuildingEntity {
         this.numberofbasement = numberofbasement;
     }
 
-//    public List<AssignBuildingEntity> getAssignBuildingEntities() {
-//        return assignBuildingEntities;
-//    }
-//
-//    public void setAssignBuildingEntities(List<AssignBuildingEntity> assignBuildingEntities) {
-//        this.assignBuildingEntities = assignBuildingEntities;
-//    }
+    public List<AssignBuildingEntity> getAssignBuildingEntities() {
+        return assignBuildingEntities;
+    }
+
+    public void setAssignBuildingEntities(List<AssignBuildingEntity> assignBuildingEntities) {
+        this.assignBuildingEntities = assignBuildingEntities;
+    }
 
 //        public DistrictEntity getDistrict() {
 //        return district;
@@ -108,12 +122,12 @@ public class BuildingEntity {
 //    public void setDistrict(DistrictEntity district) {
 //        this.district = district;
 //    }
-//    public List<RentAreaEntity> getRentAreas() {
-//        return rentAreas;
-//    }
-//    public void setRentAreas(List<RentAreaEntity> rentAreas) {
-//        this.rentAreas = rentAreas;
-//    }
+    public List<RentAreaEntity> getRentAreas() {
+        return rentAreas;
+    }
+    public void setRentAreas(List<RentAreaEntity> rentAreas) {
+        this.rentAreas = rentAreas;
+    }
     public Integer getId() {
         return id;
     }

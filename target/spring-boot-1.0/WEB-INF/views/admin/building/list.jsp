@@ -161,7 +161,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <div class ="col-xs-6">
-                                                        <form:checkboxes path="buildingtypecode" items="${typeCodes}" />
+                                                        <form:checkboxes path="buildingtypecode" items="${typeCodes}" ></form:checkboxes>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,6 +201,7 @@
                                     <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
                                 </svg>
                             </button>
+
                         </div>
 
                 <!-- Bảng Danh Sách -->
@@ -408,31 +409,68 @@
                     }
                     $('#btnDeleteBuilding').click(function(e){
                         e.preventDefault() ;
+                        var data = {} ;
                         var buildingIds = $('#tableList').find('tbody input[type = checkbox]:checked').map(function(){
                             return $(this).val();
                         }).get();
                         deleteBuildings(buildingIds) ;
 
                     });
-                    function deleteBuildings(data)
-                    {
+                    function deleteBuildings(data) {
                         $.ajax({
-                            type: "Delete",
+                            type: "DELETE",
                             url: "/api/building/" + data,
                             data: JSON.stringify(data),
                             contentType: "application/json",
                             dataType: "JSON",
-                            success: function(respond)
-                            {
-                                console.log("success") ;
+                            success: function (respond) {
+                                console.log("success");
                             },
-                            error: function(respind)
-                            {
-                                console.log("fail") ;
-                                console.log("respond") ;
+                            error: function (respind) {
+                                console.log("fail");
+                                console.log("respond");
                             }
-                        }) ;
+                        });
                     }
+                    // function deleteBuilding(data) {
+                    //     var buildingId = [data];
+                    //     deleteBuildings(buildingId);
+                    // }
+                    //
+                    // $('#btnDeleteBuilding').click(function (e) {
+                    //     e.preventDefault();
+                    //     var buildingIds = $('#tableList').find('tbody input[type=checkbox]:checked').map(function () {
+                    //         return $(this).val();
+                    //     }).get();
+                    //
+                    //     if (buildingIds.length > 0) {
+                    //         deleteBuildings(buildingIds);
+                    //     } else {
+                    //         alert("Vui lòng chọn ít nhất một tòa nhà để xóa.");
+                    //     }
+                    // });
+                    //
+                    // function deleteBuildings(ids) {
+                    //     var idString = ids.join(","); // Nối các ID thành chuỗi, ngăn cách bởi dấu phẩy
+                    //
+                    //     $.ajax({
+                    //         type: "DELETE",
+                    //         url: "/admin/building-list-" + idString,
+                    //         contentType: "application/json",
+                    //         dataType: "JSON",
+                    //         success: function (respond) {
+                    //             console.log("Xóa thành công");
+                    //             // Reload hoặc xử lý UI nếu cần
+                    //             location.reload();
+                    //         },
+                    //         error: function (respond) {
+                    //             console.log("Xóa thất bại");
+                    //             console.log(respond);
+                    //         }
+                    //     });
+                    // }
+
+
                 </script>
 </body>
 </html>

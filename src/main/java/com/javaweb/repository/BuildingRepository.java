@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BuildingRepository extends JpaRepository<BuildingEntity, Integer>, BuildingRepositoryCustom {
-//    void deleteByIdIn(List<Integer> ids) ;
-//    List<BuildingEntity> findByNameContaining(String s) ;
-//    List<BuildingEntity> findByNameContainingAndStreet(String name, String street) ;
+    void deleteByIdIn(List<Integer> ids) ;
+    List<BuildingEntity> findByNameContaining(String s) ;
+    List<BuildingEntity> findByNameContainingAndStreet(String name, String street) ;
+//    BuildingEntity findById(Integer id)  ;
 }

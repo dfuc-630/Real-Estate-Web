@@ -54,13 +54,13 @@
                     <form:form modelAttribute="buildingEdit" id="listForm" method="GET">
                         <div class ="col-xs-12">
                             <form class="form-horizontal" role = "form">
-                                <di class="form-group">
+                                <div class="form-group">
                                     <label class="col-sm-3">Tên Tòa Nhà</label>
                                     <div class="col-sm-9">
                                         <form:input class="form-control" path="name" />
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class = "col-sm-3"> Quận </label>
                                     <div class="col-sm-2">
 <%--                                        <label class = "name"> Quận </label>--%>
@@ -69,152 +69,175 @@
                                             <form:options items="${districts}"></form:options>
                                         </form:select>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Phường</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="ward" id="ward" value="">
+                                        <form:input class="form-control" path="ward" />
+<%--                                        <input class="form-control" type="text" name="ward" id="ward" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Đường</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="street" id="street" value="">
+                                        <form:input class="form-control" path="street" />
+<%--                                        <input class="form-control" type="text" name="street" id="street" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Kết Cấu</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="structure" />--%>
                                         <input class="form-control" type="text" name="structure" id="structure" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Số Tầng Hầm</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="number" name="numberofbasement" id="numberofbasement" value="">
+                                        <form:input class="form-control" path="numberofbasement" />
+<%--                                        <input class="form-control" type="number" name="numberofbasement" id="numberofbasement" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Diện Tích Sàn</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="number" name="floorarea" id="floorarea" value="">
+                                        <form:input class="form-control" path="floorarea" />
+<%--                                        <input class="form-control" type="number" name="floorarea" id="floorarea" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Hướng</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="direction" id="direction" value="">
+                                        <form:input class="form-control" path="direction" />
+<%--                                        <input class="form-control" type="text" name="direction" id="direction" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Hạng</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="level" id="level" value="">
+                                        <form:input class="form-control" path="level" />
+<%--                                        <input class="form-control" type="text" name="level" id="level" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Diện Tích Thuê</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="rentarea" id="rentarea" value="">
+                                        <form:input class="form-control" path="rentarea" />
+<%--                                        <input class="form-control" type="text" name="rentarea" id="rentarea" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Giá Thuê</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="rentprice" />--%>
                                         <input class="form-control" type="number" name="rentprice" id="rentprice" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Mô Tả Giá</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="rentpricedescription" />--%>
                                         <input class="form-control" type="text" name="rentpricedescription" id="rentpricedescription" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Phí Dịch Vụ</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="number" name="servicefee" id="servicefee" value="">
+                                        <form:input class="form-control" path="servicefee" />
+<%--                                        <input class="form-control" type="number" name="servicefee" id="servicefee" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Phí Ô Tô</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="carfee" />--%>
                                         <input class="form-control" type="number" name="carfee" id="carfee" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Phi Mô Tô</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="motorbikefee" />--%>
                                         <input class="form-control" type="number" name="motorbikefee" id="motorbikefee" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Phí Ngoài Giờ</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="overtimefee" />--%>
                                         <input class="form-control" type="number" name="overtimefee" id="overtimefee" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Tiền Điện</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="electricityfee" />--%>
                                         <input class="form-control" type="number" name="electricityfee" id="electricityfee" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Đặt Cọc</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="deposit" />--%>
                                         <input class="form-control" type="number" name="deposit" id="deposit" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Thanh Toán</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="payment" />--%>
                                         <input class="form-control" type="number" name="payment" id="payment" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Thời Hạn Thuê</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="renttime" />--%>
                                         <input class="form-control" type="text" name="renttime" id="renttime" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Thời Gian Trang Trí</label>
                                     <div class="col-sm-9">
+<%--                                        <form:input class="form-control" path="decorationtime" />--%>
                                         <input class="form-control" type="text" name="decorationtime" id="decorationtime" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Tên Quản Lý</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="managername" id="managername" value="">
+                                        <form:input class="form-control" path="managername" />
+<%--                                        <input class="form-control" type="text" name="managername" id="managername" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">SĐT Quản Lý</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="managerphonenumber" id="managerphonenumber" value="">
+                                        <form:input class="form-control" path="managerphone" />
+<%--                                        <input class="form-control" type="text" name="managerphonenumber" id="managerphonenumber" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Phí Môi Giới</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="number" name="brokeragefee" id="brokeragefee" value="">
+                                        <form:input class="form-control" path="brokeragefee" />
+<%--                                        <input class="form-control" type="number" name="brokeragefee" id="brokeragefee" value="">--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Loại Tòa Nhà</label>
                                     <div class="col-sm-9">
-                                        <form:checkboxes path="buildingtypecode" items="${typeCodes}" />
+                                        <form:checkboxes  path="type" items="${typeCodes}"></form:checkboxes>
+<%--                                        <form:options items="${typeCodes}"></form:options>--%>
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3">Ghi Chú</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" name="note" id="note" value="">
                                     </div>
-                                </di>
-                                <di class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3"></label>
                                     <div class="col-sm-9">
                                         <c:if test="${not empty buildingEdit.id}">
@@ -226,7 +249,7 @@
                                             <button class="btn btn-primary" id="btnCancel" >Hủy Thao Tác</button>
                                         </c:if>
                                     </div>
-                                </di>
+                                </div>
                                 <form:hidden path="id" id="buildingId" />
                             </form>
                         </div>
@@ -245,7 +268,7 @@
         var formData = $('#listForm').serializeArray() ;
         $.each(formData, function(i, v)
         {
-            if(v.name != 'buildingtypecode')
+            if(v.name != 'type')
             {
                 data["" + v.name + ""] = v.value ;
             }
@@ -254,7 +277,7 @@
                 typeCode.push(v.value) ;
             }
         });
-        data['buildingtypecode'] = typeCode ;
+        data['type'] = typeCode ;
         if(typeCode.length > 0) {
             addOrUpdateBuilding(data) ;
         }
@@ -274,12 +297,13 @@
             dataType: "JSON",
             success: function(respond)
             {
+                //window.location.href="<c:url value = '/admin/building-list?message=success'/>" ;
                 console.log("success") ;
             },
             error: function(respind)
             {
                 console.log("fail") ;
-                console.log("respond") ;
+                //window.location.href="<c:url value = '/admin/building-edit?message=error'/>" ;
             }
         }) ;
     }
